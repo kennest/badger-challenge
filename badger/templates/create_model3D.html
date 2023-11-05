@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -65,27 +66,15 @@
 </nav>
 <main>
     <div class="container">
-        <hr/>
-        <div class="row">
-            <div class="col-9">
-                <h1>Modèles</h1>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Ajouter un modèle</h4>
+                <form method="post" class="form" action="{% url 'create' %}">
+                    {% crispy form %}
+                </form>
+                <!-- end row-->
             </div>
-            <div class="col-1">
-                <a href="{% url 'create' %}" class="btn btn-primary">Ajouter un modèle</a>
-            </div>
-        </div>
-        <hr/>
-        <div class="card-deck">
-            {% for model in models %}
-                <a href="{% url 'detail' model.pk %}" class="card">
-                    <img class="card-img-top" width="312" height="180" src="{{ model.image.url }}"
-                         alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ model.name }}</h5>
-                        <p class="card-text"><small class="text-muted">{{ model.views }} vues</small></p>
-                    </div>
-                </a>
-            {% endfor %}
+            <!-- end card-body -->
         </div>
     </div>
 </main>

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django_filters',
     'badger',
     'django_celery_beat',
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -148,3 +150,5 @@ CELERY_BEAT_SCHEDULE = {
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/badger/home/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
