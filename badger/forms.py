@@ -13,8 +13,8 @@ class Model3DForm(ModelForm):
         self.helper.layout = Layout(
             Column(
                 "name",
-                "description",
                 "image",
+                "description",
             ),
             Submit('submit', 'Charger', css_class='btn btn-primary'),
         )

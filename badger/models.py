@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -6,7 +8,7 @@ from django.contrib.auth.models import User
 class Model3d(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='models', verbose_name='Image')
+    image = models.FileField(upload_to='models', blank=True, null=True, verbose_name='Image')
     views = models.IntegerField(default=0, verbose_name='Nombre de vues')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='models')
 
@@ -15,6 +17,8 @@ class Model3d(models.Model):
         verbose_name = 'Modèle 3D'
         verbose_name_plural = 'Modèles 3D'
 
+    def __str__(self):
+        return self.name
 
 class Badge(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -28,6 +32,7 @@ class Badge(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class UserBadge(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='badges')

@@ -1,3 +1,5 @@
+from urllib.request import Request
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponseRedirect
 from django.shortcuts import render
@@ -19,12 +21,12 @@ def award_badges(sender, instance, created, **kwargs):
     if created:
         # Award Collector badge if user has uploaded more than 5 models
         if user.models.count() > 5:
-            collector_badge = Badge.objects.get(name='Collector')
+            collector_badge = Badge.objects.get_or_create(name='Collector')
             UserBadge.objects.get_or_create(user=user, badge=collector_badge)
     else:
         # Award Star badge if model has more than 1k views
         if instance.views > 1000:
-            star_badge = Badge.objects.get(name='Star')
+            star_badge = Badge.objects.get_or_create(name='Star')
             UserBadge.objects.get_or_create(user=user, badge=star_badge)
 
 
@@ -44,10 +46,11 @@ class Model3DCreateView(CreateView):
     template_name = "create_model3D.html"
     success_url = reverse_lazy('home')
 
-    def post(self, request: HttpRequest, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         # Look up the author we're interested in.
         # Actually record interest somehow here!
-        form = Model3DForm(request.POST)
+        form = Model3DForm(request.POST,request.FILES, instance=None)
+        print(request.POST)
         if form.is_valid():
             model = form.save(commit=False)
             model.user = request.user

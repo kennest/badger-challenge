@@ -20,7 +20,7 @@ class Command(BaseCommand):
                     Badge.objects.create(name='Collector',
                                          description='You have uploaded more than 5 models',
                                          image='collector.png')
-                    Badge.objects.create(name='Pioneer',
+                    Badge.objects.create(name='Pionneer',
                                          description='You have reached 1 year on the site, you receive a badge Pionneer',
                                          image='pionneer.png')
                     self.stdout.write(f"Super user created : [ {user} ]", style_func=self.style.SUCCESS)

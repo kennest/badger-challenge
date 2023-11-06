@@ -69,7 +69,8 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="header-title">Ajouter un modèle</h4>
-                <form method="post" class="form" action="{% url 'create' %}">
+                <form method="post" class="form" action="{% url 'create' %}" enctype="multipart/form-data">
+                    <input hidden="hidden" name="user" value="{{ request.user.pk }}"/>
                     {% crispy form %}
                 </form>
                 <!-- end row-->
