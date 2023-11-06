@@ -21,12 +21,12 @@ def award_badges(sender, instance, created, **kwargs):
     if created:
         # Award Collector badge if user has uploaded more than 5 models
         if user.models.count() > 5:
-            collector_badge = Badge.objects.get_or_create(name='Collector')
+            collector_badge = Badge.objects.filter(name='Collector').first()
             UserBadge.objects.get_or_create(user=user, badge=collector_badge)
     else:
         # Award Star badge if model has more than 1k views
         if instance.views > 1000:
-            star_badge = Badge.objects.get_or_create(name='Star')
+            star_badge = Badge.objects.filter(name='Star').first()
             UserBadge.objects.get_or_create(user=user, badge=star_badge)
 
 
